@@ -68,8 +68,10 @@ const ShipmentMap = ({ shipment }) => {
           new mapboxgl.Marker({ color: '#3f51b5' })
             .setLngLat([originCoords[0], originCoords[1]])
             .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`
-              <strong>Origin</strong><br>
-              ${origin.address || ''}
+              <div style="color: #000000;">
+                <strong>Origin</strong><br>
+                ${origin.address || ''}
+              </div>
             `))
             .addTo(map.current);
 
@@ -77,8 +79,10 @@ const ShipmentMap = ({ shipment }) => {
           new mapboxgl.Marker({ color: '#4caf50' })
             .setLngLat([destCoords[0], destCoords[1]])
             .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`
-              <strong>Destination</strong><br>
-              ${destination.address || ''}
+              <div style="color: #000000;">
+                <strong>Destination</strong><br>
+                ${destination.address || ''}
+              </div>
             `))
             .addTo(map.current);
 
@@ -94,9 +98,11 @@ const ShipmentMap = ({ shipment }) => {
                   const marker = new mapboxgl.Marker({ color: checkpoint.reached ? '#4caf50' : '#9c27b0' })
                     .setLngLat([cpCoords[0], cpCoords[1]])
                     .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`
-                      <strong>Checkpoint: ${checkpoint.name || `#${index + 1}`}</strong><br>
-                      ${checkpoint.location.address || ''}<br>
-                      <small>${checkpoint.reached ? 'Reached' : 'Not reached yet'}</small>
+                      <div style="color: #000000;">
+                        <strong>Checkpoint: ${checkpoint.name || `#${index + 1}`}</strong><br>
+                        ${checkpoint.location.address || ''}<br>
+                        <small>${checkpoint.reached ? 'Reached' : 'Not reached yet'}</small>
+                      </div>
                     `))
                     .addTo(map.current);
                   
@@ -110,9 +116,11 @@ const ShipmentMap = ({ shipment }) => {
           new mapboxgl.Marker({ color: status === 'delivered' ? '#4caf50' : '#ff9800' })
             .setLngLat([currentCoords[0], currentCoords[1]])
             .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`
-              <strong>${status === 'delivered' ? 'Delivered' : 'Current Location'}</strong><br>
-              ${currentLocation.address || ''}<br>
-              <small>${currentLocation.timestamp ? new Date(currentLocation.timestamp).toLocaleString() : ''}</small>
+              <div style="color: #000000;">
+                <strong>${status === 'delivered' ? 'Delivered' : 'Current Location'}</strong><br>
+                ${currentLocation.address || ''}<br>
+                <small>${currentLocation.timestamp ? new Date(currentLocation.timestamp).toLocaleString() : ''}</small>
+              </div>
             `))
             .addTo(map.current);
 

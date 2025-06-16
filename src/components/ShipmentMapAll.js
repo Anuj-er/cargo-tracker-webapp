@@ -118,12 +118,12 @@ const ShipmentMapAll = ({ shipments }) => {
               closeButton: false,
               maxWidth: '300px'
             }).setHTML(`
-              <div style="padding: 8px;">
-                <h4 style="margin: 0 0 8px 0; font-size: 16px; color: #333;">${shipment.trackingNumber || 'Unknown'}</h4>
-                <p style="margin: 0 0 5px 0; font-size: 14px;">
+              <div style="padding: 8px; color: #000000;">
+                <h4 style="margin: 0 0 8px 0; font-size: 16px; color: #000000;">${shipment.trackingNumber || 'Unknown'}</h4>
+                <p style="margin: 0 0 5px 0; font-size: 14px; color: #000000;">
                   <strong>Status:</strong> ${((shipment.status || 'unknown').replace(/_/g, ' '))}
                 </p>
-                <p style="margin: 0; font-size: 14px; color: #666;">
+                <p style="margin: 0; font-size: 14px; color: #000000;">
                   ${shipment.currentLocation.address || 'No address available'}
                 </p>
               </div>
