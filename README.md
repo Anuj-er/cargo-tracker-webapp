@@ -29,7 +29,7 @@
 
 ## 🔍 Overview
 
-This is the frontend application for the Cargo Shipment Tracker, built using React and Material UI. It provides a user-friendly interface for tracking shipments, viewing their current locations on a map, and managing shipment details.
+This is the frontend application for the Shipment Tracker, built using React and Material UI. It provides a user-friendly interface for tracking shipments, viewing their current locations on a map, and managing shipment details.
 
 The application connects to the backend API to fetch and update shipment data, providing real-time tracking information to users.
 
