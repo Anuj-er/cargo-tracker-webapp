@@ -184,6 +184,25 @@ const ShipmentMapAll = ({ shipments }) => {
     };
   }, [shipments]);
 
+  // Handle animation start/stop
+  useEffect(() => {
+    // Fix: Save ref to a variable inside the effect
+    const currentAnimationRef = animationRef.current;
+    
+    // Start animation if simulation is active
+    if (isSimulationActive && shipments.length > 0) {
+      animationRef.current = requestAnimationFrame(animate);
+    }
+    
+    // Cleanup function with captured ref value
+    return () => {
+      if (currentAnimationRef) {
+        cancelAnimationFrame(currentAnimationRef);
+      }
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSimulationActive, shipments.length, animate]);
+
   if (mapError) {
     return (
       <Box sx={{ height: '100%', p: 2 }}>

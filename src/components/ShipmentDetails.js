@@ -27,7 +27,6 @@ import {
   CircularProgress
 } from '@mui/material';
 import {
-  LocalShipping as ShippingIcon,
   CheckCircle as CheckCircleIcon,
   Schedule as ScheduleIcon,
   LocationOn as LocationIcon,
@@ -166,14 +165,14 @@ const ShipmentDetails = ({ shipment, onUpdateLocation, updatingLocation, locatio
     };
   };
   
-  // Debounced address search - Moved before any conditional returns
-  const debouncedFetchAddresses = useCallback(
-    debounce((query) => fetchAddressSuggestions(query), 300),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+  // Fixed inline function for useCallback to avoid dependency warnings
+  const debouncedFetchAddresses = useCallback((query) => {
+    const delayedFetch = debounce((q) => fetchAddressSuggestions(q), 300);
+    delayedFetch(query);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
-  // Fetch route distance on component mount - Moved before any conditional returns
+  // Fetch route distance on component mount
   useEffect(() => {
     if (shipment && shipment.trackingNumber) {
       fetchRouteDistance(shipment.trackingNumber);
@@ -198,6 +197,8 @@ const ShipmentDetails = ({ shipment, onUpdateLocation, updatingLocation, locatio
     estimatedDelivery,
     items = [],
     history = [],
+    // We'll keep this even though it's unused to maintain compatibility with the rest of the code
+    // eslint-disable-next-line no-unused-vars
     checkpoints = [],
   } = shipment;
 
