@@ -5,6 +5,9 @@ import { Box, Typography, Alert, CircularProgress } from '@mui/material';
 // Use environment variable for Mapbox token
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
+// Disable Mapbox telemetry and analytics to prevent token exposure
+mapboxgl.config.SEND_EVENTS_DEFAULT = false;
+
 // Set the token
 mapboxgl.accessToken = MAPBOX_TOKEN;
 

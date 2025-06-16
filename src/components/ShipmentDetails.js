@@ -125,6 +125,12 @@ const ShipmentDetails = ({ shipment, onUpdateLocation, updatingLocation, locatio
   const fetchAddressSuggestions = async (query) => {
     if (!query || query.length < 3 || !MAPBOX_TOKEN) return;
     
+    // Check for placeholder token and don't make requests if token is not valid
+    if (MAPBOX_TOKEN === 'placeholder' || MAPBOX_TOKEN === 'your_mapbox_token') {
+      console.warn('Using placeholder Mapbox token. Geocoding requests disabled.');
+      return;
+    }
+    
     try {
       setLoadingAddresses(true);
       const response = await axios.get(
