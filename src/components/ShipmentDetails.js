@@ -107,6 +107,80 @@ const ShipmentDetails = ({ shipment, onUpdateLocation, updatingLocation, locatio
   // Geocoding API key - in a real app, use environment variables
   const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
   
+  // Fetch route distance
+  const fetchRouteDistance = async (trackingNumber) => {
+    try {
+      setLoadingDistance(true);
+      setDistanceError(null);
+      const data = await getRouteDistance(trackingNumber);
+      setRouteDistanceData(data);
+    } catch (error) {
+      console.error('Error fetching route distance:', error);
+      setDistanceError(error.message);
+    } finally {
+      setLoadingDistance(false);
+    }
+  };
+
+  // Fetch address suggestions from Mapbox Geocoding API
+  const fetchAddressSuggestions = async (query) => {
+    if (!query || query.length < 3 || !MAPBOX_TOKEN) return;
+    
+    try {
+      setLoadingAddresses(true);
+      const response = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json`,
+        {
+          params: {
+            access_token: MAPBOX_TOKEN,
+            autocomplete: true,
+            limit: 5,
+          }
+        }
+      );
+      
+      if (response.data && response.data.features) {
+        const suggestions = response.data.features.map(feature => ({
+          place_name: feature.place_name,
+          center: feature.center, // [longitude, latitude]
+        }));
+        setAddressOptions(suggestions);
+      }
+    } catch (error) {
+      console.error('Error fetching address suggestions:', error);
+    } finally {
+      setLoadingAddresses(false);
+    }
+  };
+
+  // Debounce function for address search
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return function(...args) {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  };
+  
+  // Debounced address search - Moved before any conditional returns
+  const debouncedFetchAddresses = useCallback(
+    debounce((query) => fetchAddressSuggestions(query), 300),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+  
+  // Fetch route distance on component mount - Moved before any conditional returns
+  useEffect(() => {
+    if (shipment && shipment.trackingNumber) {
+      fetchRouteDistance(shipment.trackingNumber);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shipment]);
+  
   if (!shipment) {
     return (
       <Box display="flex" justifyContent="center" p={4}>
@@ -172,60 +246,7 @@ const ShipmentDetails = ({ shipment, onUpdateLocation, updatingLocation, locatio
   const isDelivered = status === 'delivered';
   const isInTransit = status === 'in_transit' || status === 'out_for_delivery';
 
-  // Fetch route distance on component mount
-  useEffect(() => {
-    if (shipment && shipment.trackingNumber) {
-      fetchRouteDistance(shipment.trackingNumber);
-    }
-  }, [shipment]);
-
-  // Fetch route distance
-  const fetchRouteDistance = async (trackingNumber) => {
-    try {
-      setLoadingDistance(true);
-      setDistanceError(null);
-      const data = await getRouteDistance(trackingNumber);
-      setRouteDistanceData(data);
-    } catch (error) {
-      console.error('Error fetching route distance:', error);
-      setDistanceError(error.message);
-    } finally {
-      setLoadingDistance(false);
-    }
-  };
-
-  // Fetch address suggestions from Mapbox Geocoding API
-  const fetchAddressSuggestions = async (query) => {
-    if (!query || query.length < 3 || !MAPBOX_TOKEN) return;
-    
-    try {
-      setLoadingAddresses(true);
-      const response = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json`,
-        {
-          params: {
-            access_token: MAPBOX_TOKEN,
-            autocomplete: true,
-            limit: 5,
-          }
-        }
-      );
-      
-      if (response.data && response.data.features) {
-        const suggestions = response.data.features.map(feature => ({
-          place_name: feature.place_name,
-          center: feature.center, // [longitude, latitude]
-        }));
-        setAddressOptions(suggestions);
-      }
-    } catch (error) {
-      console.error('Error fetching address suggestions:', error);
-    } finally {
-      setLoadingAddresses(false);
-    }
-  };
-  
-  // Handle address selection
+  // Handle address select
   const handleAddressSelect = (event, value) => {
     if (value && typeof value !== 'string') {
       // Extract main address and preserve any existing additional details
@@ -246,25 +267,6 @@ const ShipmentDetails = ({ shipment, onUpdateLocation, updatingLocation, locatio
     // Clear predictions
     setAddressOptions([]);
   };
-  
-  // Debounce function for address search
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return function(...args) {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => {
-        func.apply(this, args);
-      }, delay);
-    };
-  };
-  
-  // Debounced address search
-  const debouncedFetchAddresses = useCallback(
-    debounce((query) => fetchAddressSuggestions(query), 300),
-    [MAPBOX_TOKEN]
-  );
   
   // Handle address input change
   const handleAddressInputChange = (event, value) => {
