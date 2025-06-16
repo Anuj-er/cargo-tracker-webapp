@@ -1,105 +1,92 @@
-<div align="center">
-  <img src="public/favicons/android-chrome-512x512.png" alt="Shipment Tracker Logo" width="100" height="100">
-  <h1>Shipment Tracker - Frontend</h1>
-  <p>A modern React application for tracking cargo shipments in real-time</p>
-  
-  <div>
-    <img src="https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge&logo=react" alt="React">
-    <img src="https://img.shields.io/badge/Material_UI-5.15.10-007FFF?style=for-the-badge&logo=mui" alt="Material UI">
-    <img src="https://img.shields.io/badge/Leaflet-4.2.1-199900?style=for-the-badge&logo=leaflet" alt="Leaflet">
-  </div>
-</div>
+# Shipment Tracker - Frontend
 
-<hr>
+![GitHub](https://img.shields.io/github/license/Anuj-er/cargo-tracker-webapp)
+![React](https://img.shields.io/badge/react-18.x-blue)
+![Docker](https://img.shields.io/badge/docker-ready-brightgreen)
 
-## 📋 Table of Contents
+A modern React application for real-time cargo shipment tracking with interactive maps and comprehensive dashboard. Built as part of the MERN Stack Tracking Assignment.
 
-- [Overview](#overview)
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Technologies](#technologies)
-- [Installation](#installation)
-- [Environment Variables](#environment-variables)
-- [Available Scripts](#available-scripts)
-- [Folder Structure](#folder-structure)
-- [Assumptions](#assumptions)
-- [API Integration](#api-integration)
+## 🔗 Repository Links
+- Frontend: [https://github.com/Anuj-er/cargo-tracker-webapp](https://github.com/Anuj-er/cargo-tracker-webapp)
+- Backend: [https://github.com/Anuj-er/cargo-tracker-backend](https://github.com/Anuj-er/cargo-tracker-backend)
 
-<hr>
+## 📋 Assignment Fulfillment
 
-## 🔍 Overview
+This project implements a complete Cargo Shipment Tracker using the MERN stack as per the assignment requirements:
 
-This is the frontend application for the Shipment Tracker, built using React and Material UI. It provides a user-friendly interface for tracking shipments, viewing their current locations on a map, and managing shipment details.
+### Frontend Implementation
+- **Dashboard**: Implemented tabular structure listing all shipments with filtering and sorting capabilities
+- **Map Integration**: Used Mapbox for interactive maps showing shipment routes and current locations
+- **Create Shipment**: Form to add new shipments with container ID and details
+- **Update Location**: Interface to update shipment locations
+- **Real-time ETA**: Display of estimated time of arrival based on current location
 
-The application connects to the backend API to fetch and update shipment data, providing real-time tracking information to users.
+## 📊 Key Features
 
-<hr>
-
-## ✨ Features
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">🌐</td>
-      <td><strong>Interactive Maps</strong><br>View shipment locations and routes on interactive maps</td>
-    </tr>
-    <tr>
-      <td align="center">📊</td>
-      <td><strong>Shipment Dashboard</strong><br>Tabular view of all shipments with filtering and sorting</td>
-    </tr>
-    <tr>
-      <td align="center">➕</td>
-      <td><strong>Create Shipments</strong><br>Add new shipments with detailed information</td>
-    </tr>
-    <tr>
-      <td align="center">🔄</td>
-      <td><strong>Real-time Updates</strong><br>Update shipment locations and track status changes</td>
-    </tr>
-    <tr>
-      <td align="center">📱</td>
-      <td><strong>Responsive Design</strong><br>Works seamlessly on desktop and mobile devices</td>
-    </tr>
-  </table>
-</div>
-
-<hr>
+- **Interactive Maps** - Track shipments in real-time with Mapbox integration
+- **Comprehensive Dashboard** - Filter, sort, and manage all shipments
+- **Responsive Design** - Optimized for both desktop and mobile devices
+- **Real-time Updates** - Live shipment status and location updates
+- **Docker Support** - Complete containerization for easy deployment
 
 ## 📸 Screenshots
 
-<div align="center">
-  <p><em>Dashboard view showing shipment list and status</em></p>
-  <img src="public/images/shipping-background.jpg" alt="Dashboard" width="700">
-  
-  <p><em>Interactive map showing shipment route and current location</em></p>
-  <img src="public/images/real-time.jpg" alt="Map View" width="700">
-  
-  <p><em>Form for creating new shipments</em></p>
-  <img src="public/images/support.jpg" alt="Create Shipment" width="700">
-</div>
+### All Shipments Dashboard
+View and manage all shipments in a sortable, filterable table format.
 
-<hr>
+![All Shipments Dashboard](./screenshots/allshipment.png)
+
+### Shipment Tracking
+Track individual shipments with real-time location updates and route visualization.
+
+![Shipment Tracking Map](./screenshots/track.png)
+
+### Create New Shipment
+User-friendly form to add new shipments with container ID and route details.
+
+![Create Shipment Form](./screenshots/createshipment.png)
+
+## 🚀 Live Demo
+
+- Frontend: [https://shipmenttracker.vercel.app/](https://shipmenttracker.vercel.app/)
+- Backend API: [https://cargo-tracker-backend-jhy2.onrender.com](https://cargo-tracker-backend-jhy2.onrender.com)
 
 ## 🛠️ Technologies
 
-- **React 18** - Frontend library
-- **Material UI** - Component library for consistent UI
+### Frontend Stack
+- **React.js** - UI library
+- **Mapbox GL** - Interactive maps
 - **React Router** - Navigation and routing
 - **Axios** - API requests
-- **Leaflet** - Interactive maps
-- **Notistack** - Toast notifications
+- **Bootstrap** - Responsive styling
 
-<hr>
+## 🔧 Setup and Installation
 
-## 📥 Installation
+### Prerequisites
 
-Follow these steps to set up the frontend application:
+- [Node.js](https://nodejs.org/) (v14 or later)
+- [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/install/) (optional, for containerized deployment)
+- [Mapbox](https://www.mapbox.com/) account for API token
+
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+REACT_APP_API_URL=https://cargo-tracker-backend-jhy2.onrender.com/api
+REACT_APP_MAPBOX_TOKEN=your_mapbox_token
+```
+
+### Installation Options
+
+#### Standard Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/tracker-frontend.git
+git clone https://github.com/Anuj-er/cargo-tracker-webapp.git
 
 # Navigate to the project directory
-cd tracker-frontend
+cd cargo-tracker-webapp
 
 # Install dependencies
 npm install
@@ -108,79 +95,121 @@ npm install
 npm start
 ```
 
-The application will be available at [http://localhost:3000](http://localhost:3000)
+The application will be available at http://localhost:3000
 
-<hr>
+#### Docker Setup (Recommended)
 
-## 🔐 Environment Variables
+```bash
+# Clone the repository
+git clone https://github.com/Anuj-er/cargo-tracker-webapp.git
 
-Create a `.env` file in the root directory with the following variables:
+# Navigate to the project directory
+cd cargo-tracker-webapp
 
-```
-# API URL for development
-REACT_APP_API_URL=http://localhost:5000/api
+# Create .env file with required environment variables
+echo "REACT_APP_API_URL=https://cargo-tracker-backend-jhy2.onrender.com/api" > .env
+echo "REACT_APP_MAPBOX_TOKEN=your_mapbox_token" >> .env
 
-# Mapbox token for maps (get one at https://account.mapbox.com/)
-REACT_APP_MAPBOX_TOKEN=your_mapbox_token_here
-```
+# Make the deploy script executable
+chmod +x docker-deploy.sh
 
-<hr>
-
-## 📜 Available Scripts
-
-In the project directory, you can run:
-
-- `npm start` - Runs the app in development mode
-- `npm run build` - Builds the app for production
-- `npm test` - Runs the test suite
-- `npm run eject` - Ejects from Create React App
-
-<hr>
-
-## 📁 Folder Structure
-
-```
-tracker-frontend/
-├── public/               # Public assets
-│   ├── favicons/         # Favicon files
-│   ├── images/           # Image assets
-│   ├── index.html        # HTML template
-│   └── manifest.json     # Web app manifest
-├── src/
-│   ├── components/       # Reusable components
-│   ├── context/          # React context providers
-│   ├── pages/            # Page components
-│   ├── routes/           # Route definitions
-│   ├── services/         # API services
-│   ├── App.js            # Main App component
-│   └── index.js          # Entry point
-└── package.json          # Dependencies and scripts
+# Run the deployment script
+./docker-deploy.sh
 ```
 
-<hr>
+The application will be available at http://localhost
 
-## 🤔 Assumptions
+## 📱 Application Structure
 
-- The backend API is available at the URL specified in the `.env` file
-- Users have modern browsers that support ES6+ features
-- Authentication and authorization are handled separately or will be added in future versions
-- The application is primarily used on desktop devices, but is responsive for mobile use
-- Internet connectivity is required for the application to function properly
-- Map data is available through Mapbox API
+### Dashboard View
+- Tabular list of all shipments
+- Filtering and sorting options
+- Quick status overview
+- Create new shipment button
 
-<hr>
+### Map View
+- Interactive map showing shipment routes
+- Current location markers
+- Route visualization
+- ETA display
 
-## 🔌 API Integration
+### Shipment Management
+- Create new shipments
+- Update shipment locations
+- Track shipment status
 
-The frontend connects to the following backend API endpoints:
+## 🤝 Integration with Backend
 
-- `GET /api/shipments` - Fetch all shipments
-- `GET /api/shipments/:trackingNumber` - Fetch a specific shipment
-- `POST /api/shipments` - Create a new shipment
-- `PATCH /api/shipments/:trackingNumber/location` - Update shipment location
-- `GET /api/shipments/:trackingNumber/history` - Get shipment history
-- `GET /api/shipments/:trackingNumber/eta` - Get shipment ETA
+The frontend communicates with the backend API using the following endpoints:
 
-<div align="center">
-  <p>Built with ❤️ by Your Name</p>
-</div> 
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/shipments` | GET | Retrieve all shipments |
+| `/api/shipments/:id` | GET | Get specific shipment details |
+| `/api/shipments/:id/update-location` | POST | Update shipment location |
+| `/api/shipments/:id/eta` | GET | Get estimated arrival time |
+| `/api/shipments` | POST | Create a new shipment |
+
+## 🐳 Docker Commands
+
+### Building and Running
+```bash
+# Build and start the container (uses docker-compose.yml)
+docker-compose up -d --build
+
+# Alternative: Run the deploy script
+./docker-deploy.sh
+```
+
+### Monitoring and Management
+```bash
+# View running containers
+docker ps
+
+# View container logs
+docker-compose logs -f
+
+# View logs for a specific service
+docker-compose logs -f webapp
+
+# Check container health
+docker ps --format "{{.Names}}: {{.Status}}"
+```
+
+### Stopping and Cleaning Up
+```bash
+# Stop containers
+docker-compose down
+
+# Stop containers and remove volumes
+docker-compose down -v
+
+# Remove all stopped containers, unused networks, images and volumes
+docker system prune -a --volumes
+```
+
+### Rebuilding After Changes
+```bash
+# Rebuild the application after code changes
+docker-compose up -d --build
+```
+
+## 🚢 Deployment
+
+### Vercel Deployment
+1. Connect your GitHub repository to Vercel
+2. Configure build settings (automatic)
+3. Add environment variables (REACT_APP_API_URL, REACT_APP_MAPBOX_TOKEN)
+
+## 📝 Assumptions
+
+- Users have basic knowledge of shipping logistics
+- The backend API is accessible at the specified URL
+- Mapbox is used for map visualization
+- Each shipment has a unique ID and container ID
+- Location updates may be manual or automated
+- Authentication is handled separately or will be implemented in future versions
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 

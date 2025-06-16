@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  webapp:
+    build:
+      context: .
+      args:
+        - REACT_APP_API_URL=${REACT_APP_API_URL}
+        - REACT_APP_MAPBOX_TOKEN=${REACT_APP_MAPBOX_TOKEN}
+    container_name: shipment-tracker-webapp
+    restart: always
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+    networks:
+      - shipment-network
+
+networks:
+  shipment-network:
+    driver: bridge 
