@@ -22,7 +22,6 @@ const ShipmentMapAll = ({ shipments }) => {
   const map = useRef(null);
   const [mapError, setMapError] = useState(null);
   const [mapLoading, setMapLoading] = useState(true);
-  const animationRef = useRef(null);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -177,31 +176,8 @@ const ShipmentMapAll = ({ shipments }) => {
     // Clean up on unmount
     return () => {
       if (map.current) map.current.remove();
-      // Cancel any pending animation frames
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
     };
   }, [shipments]);
-
-  // Handle animation start/stop
-  useEffect(() => {
-    // Fix: Save ref to a variable inside the effect
-    const currentAnimationRef = animationRef.current;
-    
-    // Start animation if simulation is active
-    if (isSimulationActive && shipments.length > 0) {
-      animationRef.current = requestAnimationFrame(animate);
-    }
-    
-    // Cleanup function with captured ref value
-    return () => {
-      if (currentAnimationRef) {
-        cancelAnimationFrame(currentAnimationRef);
-      }
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSimulationActive, shipments.length, animate]);
 
   if (mapError) {
     return (
